@@ -12,21 +12,26 @@ const px = (px) => `${px}px`;
 module.exports = {
 	important: true, // See https://tailwindcss.com/docs/configuration#important
 	purge: {
-		enabled: process.env.HUGO_ENVIRONMENT === 'production',
-    content: [
-      './hugo_stats.json',
-      './layouts/**/*.html',
-		],
-		extractors: [
-      {
-        extractor: (content) => {
-					let els = JSON.parse(content).htmlElements;
-					return els.tags.concat(els.classes, els.ids);
-				},
-        extensions: ['json']
-      },
-    ],
-		mode: 'all',
+	   enabled: process.env.HUGO_ENVIRONMENT === 'production',
+           content: [
+              './hugo_stats.json',
+              './layouts/**/*.html',
+	   ],
+	   extractors: [
+      	      {
+              extractor: (content) => {
+			let els = JSON.parse(content).htmlElements;
+			return els.tags.concat(els.classes, els.ids);
+			},
+              extensions: ['json']
+      	      },
+           ],
+	   mode: 'all',
+	   options: {
+           safelist: [
+              // Put your safelist (was whitelist in v1) here
+	      // ex : 'random', 'yep', 'button'
+           ]
 		
 	},
 	plugins: [ typography ]
